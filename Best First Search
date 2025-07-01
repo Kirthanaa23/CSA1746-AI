@@ -1,0 +1,16 @@
+edge(a, b, 1).
+edge(a, c, 3).
+edge(b, d, 4).
+edge(c, d, 1).
+
+heuristic(a, 3).
+heuristic(b, 2).
+heuristic(c, 1).
+heuristic(d, 0).
+
+best_first(Node, Goal) :- 
+    heuristic(Node, H),
+    write('Visiting: '), write(Node), write(' Heuristic: '), write(H), nl,
+    (Node = Goal -> write('Reached goal.'), !;
+     edge(Node, Next, _), 
+     best_first(Next, Goal)).
